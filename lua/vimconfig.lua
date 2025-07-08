@@ -25,13 +25,32 @@ vim.g.clipboard = {
 }
 
 -- Folding
-vim.o.foldcolumn = "1" -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldcolumn = "0"
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	callback = function()
+		-- check if treesitter has parser
+		if require("nvim-treesitter.parsers").has_parser() then
+			-- use treesitter folding
+			vim.opt.foldmethod = "expr"
+			vim.opt.foldexpr = "vim.treesitter.foldexpr()"
+		else
+			-- use alternative foldmethod
+			vim.opt.foldmethod = "syntax"
+		end
+	end,
+})
+
+-- Workaround for telescope with folds
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    if vim.opt.foldmethod:get() == "expr" then
+      vim.schedule(function()
+        vim.opt.foldmethod = "expr"
+      end)
+    end
+  end,
+})
 
 -- Numbered lines
 vim.opt.number = true
