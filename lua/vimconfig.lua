@@ -110,3 +110,6 @@ vim.o.statuscolumn = ""
 
 vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action)
+
+-- Swap file
+vim.o.swapfile = false
