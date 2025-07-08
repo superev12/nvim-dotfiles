@@ -6,6 +6,8 @@ vim.opt.expandtab = true -- Use spaces by default
 vim.opt.shiftwidth = 2 -- Set amount of space characters, when we press "<" or ">"
 vim.opt.tabstop = 2 -- 1 tab equal 2 spaces
 vim.opt.smartindent = true -- Turn on smart indentation. See in the docs for more info
+vim.opt.list = true -- Turn on list mode
+vim.opt.listchars = "tab:▸ ,trail:🞙,nbsp:▸" -- Show tabs and trailing spaces
 
 -- Clipboard
 -- vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
