@@ -26,6 +26,9 @@ vim.g.clipboard = {
 
 -- Folding
 vim.o.foldenable = true
+vim.opt.foldcolumn = "0"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
@@ -33,7 +36,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		if require("nvim-treesitter.parsers").has_parser() then
 			-- use treesitter folding
 			vim.opt.foldmethod = "expr"
-			vim.opt.foldexpr = "vim.treesitter.foldexpr()"
+			vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		else
 			-- use alternative foldmethod
 			vim.opt.foldmethod = "syntax"
