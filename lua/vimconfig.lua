@@ -113,3 +113,16 @@ vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action)
 
 -- Swap file
 vim.o.swapfile = false
+
+-- Remove theme background
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    vim.cmd [[
+      highlight Normal guibg=none
+      highlight NonText guibg=none
+      highlight Normal ctermbg=none
+      highlight NonText ctermbg=none
+    ]]
+  end,
+})
+
